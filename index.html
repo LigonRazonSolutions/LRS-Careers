@@ -1,437 +1,1669 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ligon-Razon Solutions Recruitment Portal</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ligon-Razon Solutions | Careers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f8fbfb;
+      --surface: rgba(255,255,255,.72);
+      --surface-strong: #ffffff;
+      --navy: #222B3C;
+      --green: #2A957D;
+      --blue: #52A9B9;
+      --green-dark: #1E7060;
+      --ink: #0f1b2d;
+      --muted: #5f6d7e;
+      --border: rgba(34,43,60,.10);
+      --shadow: 0 24px 80px rgba(34,43,60,.10);
+      --shadow-lg: 0 30px 90px rgba(34,43,60,.16);
+      --radius: 28px;
+      --radius-sm: 18px;
+      --max: 100%;
+      --pad: clamp(20px, 3vw, 40px);
+    }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Manrope, system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(82,169,185,.12), transparent 32%),
+        radial-gradient(circle at 90% 18%, rgba(42,149,125,.12), transparent 26%),
+        linear-gradient(180deg, #ffffff 0%, #f7fbfb 48%, #f2f7f8 100%);
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    ::selection { background: rgba(42,149,125,.18); }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+    .page {
+      width: 100%;
+      position: relative;
+      isolation: isolate;
+    }
 
-body{
-background:#08111d;
-color:white;
-overflow-x:hidden;
-}
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .20;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.2'/%3E%3C/svg%3E");
+    }
 
-.hero{
-min-height:100vh;
-display:flex;
-align-items:center;
-padding:80px 6%;
-background:
-radial-gradient(circle at top left, rgba(82,169,185,.18), transparent 30%),
-radial-gradient(circle at bottom right, rgba(42,149,125,.22), transparent 30%),
-linear-gradient(135deg,#08111d,#10263f);
-}
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding-inline: var(--pad);
+    }
 
-.hero-content{
-display:grid;
-grid-template-columns:1fr 1.2fr;
-gap:60px;
-align-items:center;
-width:100%;
-max-width:1600px;
-margin:auto;
-}
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(255,255,255,.66);
+      border-bottom: 1px solid rgba(34,43,60,.06);
+    }
+    .header-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+    .brand img {
+      width: 54px;
+      height: 54px;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
+    .brand-copy {
+      line-height: 1.05;
+    }
+    .brand-copy strong {
+      display: block;
+      font-weight: 800;
+      letter-spacing: .08em;
+      color: var(--navy);
+      text-transform: uppercase;
+      font-size: .98rem;
+    }
+    .brand-copy span {
+      display: block;
+      margin-top: 3px;
+      color: var(--green);
+      font-size: .68rem;
+      letter-spacing: .34em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .nav a {
+      color: var(--navy);
+      font-weight: 600;
+      font-size: .95rem;
+      opacity: .92;
+    }
+    .nav a:hover { color: var(--green); }
+    .nav-cta {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 22px;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      color: white;
+      font-weight: 800;
+      letter-spacing: .01em;
+      box-shadow: 0 10px 28px rgba(42,149,125,.24);
+      cursor: pointer;
+      transition: transform .22s ease, box-shadow .22s ease;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(42,149,125,.28); }
 
-.logo{
-width:120px;
-margin-bottom:30px;
-}
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 28px 0 24px;
+      overflow: hidden;
+    }
+    .hero-shell {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 clamp(18px, 3vw, 48px);
+      position: relative;
+    }
+    .hero-card {
+      width: 100%;
+      position: relative;
+      min-height: 100vh;
+      border-radius: 38px;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(82,169,185,.18), transparent 16%),
+        radial-gradient(circle at 82% 14%, rgba(42,149,125,.16), transparent 16%),
+        linear-gradient(180deg, #ffffff 0%, #f9fcfc 100%);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(34,43,60,.06);
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(34,43,60,.02), transparent 36%),
+        radial-gradient(circle at 100% 0%, rgba(82,169,185,.10), transparent 22%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: clamp(24px, 4vw, 60px);
+      align-items: center;
+      padding: clamp(28px, 4.8vw, 56px);
+      min-height: 100vh;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--green);
+      letter-spacing: .34em;
+      font-weight: 800;
+      font-size: .72rem;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .eyebrow::after {
+      content: "";
+      width: 74px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--green), transparent);
+    }
+    .hero h1 {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(3rem, 6vw, 5.7rem);
+      line-height: .96;
+      letter-spacing: -.04em;
+      color: var(--navy);
+      max-width: 9.7ch;
+    }
+    .hero h1 em {
+      color: var(--green);
+      font-style: italic;
+      display: inline-block;
+    }
+    .hero p {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.5vw, 1.12rem);
+      line-height: 1.8;
+      max-width: 54ch;
+    }
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+      max-width: 690px;
+    }
+    .point {
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(34,43,60,.06);
+      border-radius: 18px;
+      padding: 14px 12px;
+      display: grid;
+      gap: 8px;
+      min-height: 110px;
+      box-shadow: 0 10px 24px rgba(34,43,60,.05);
+    }
+    .point .ico {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(42,149,125,.10);
+      color: var(--green);
+      font-weight: 800;
+      font-size: .9rem;
+    }
+    .point strong {
+      color: var(--navy);
+      font-size: .94rem;
+      line-height: 1.15;
+    }
+    .point span {
+      color: var(--muted);
+      font-size: .84rem;
+      line-height: 1.4;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 16px 26px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .22s ease, box-shadow .22s ease, opacity .22s ease;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      color: white;
+      box-shadow: 0 14px 32px rgba(42,149,125,.24);
+    }
+    .btn-secondary {
+      background: white;
+      color: var(--navy);
+      border: 1px solid rgba(34,43,60,.12);
+    }
+    .btn-secondary:hover { box-shadow: 0 12px 28px rgba(34,43,60,.08); }
 
-.hero h1{
-font-size:5rem;
-line-height:1.05;
-margin-bottom:24px;
-}
+    .hero-visual {
+      position: relative;
+      min-height: 640px;
+      display: grid;
+      place-items: center;
+    }
+    .hero-shape {
+      position: absolute;
+      inset: 12% 6% 8% 10%;
+      clip-path: polygon(10% 16%, 86% 0, 100% 57%, 54% 100%, 0 70%);
+      background: linear-gradient(135deg, rgba(82,169,185,.18), rgba(42,149,125,.16));
+      filter: blur(.1px);
+      transform: rotate(6deg);
+    }
+    .hero-stack {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: end center;
+    }
+    .hero-stack img {
+      position: absolute;
+      width: min(100%, 760px);
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 24px 50px rgba(34,43,60,.16));
+      transform-origin: center;
+    }
+    .hero-team-large {
+      bottom: 1%;
+      right: -2%;
+      width: min(106%, 760px);
+      z-index: 2;
+      transform: translateX(2%);
+    }
+    .hero-team-black {
+      bottom: 0;
+      right: -4%;
+      width: min(102%, 720px);
+      z-index: 1;
+      opacity: .95;
+      mix-blend-mode: multiply;
+    }
+    .hero-logo-mark {
+      position: absolute;
+      top: 2%;
+      right: 6%;
+      width: min(82%, 360px);
+      z-index: 0;
+      opacity: .95;
+      filter: saturate(1.02);
+    }
+    .hero-cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+      max-width: 590px;
+    }
+    .mini-card {
+      padding: 16px 16px 14px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(34,43,60,.06);
+      box-shadow: 0 10px 24px rgba(34,43,60,.05);
+    }
+    .mini-card strong {
+      display:block;
+      font-size: .92rem;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .mini-card p {
+      margin: 0;
+      font-size: .84rem;
+      line-height: 1.45;
+    }
 
-.hero p{
-font-size:1.1rem;
-line-height:1.8;
-opacity:.85;
-margin-bottom:35px;
-max-width:620px;
-}
+    .section {
+      position: relative;
+      padding: 18px 0 0;
+    }
+    .panel {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 clamp(18px, 3vw, 48px);
+      margin-top: 24px;
+    }
+    .glass {
+      background: var(--surface);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(34,43,60,.07);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+    }
 
-.btn{
-padding:18px 34px;
-border:none;
-border-radius:16px;
-background:#2a957d;
-color:white;
-font-size:1rem;
-font-weight:600;
-cursor:pointer;
-transition:.3s;
-}
+    .split {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .left-card,
+    .right-card {
+      padding: clamp(24px, 3vw, 34px);
+      border-radius: var(--radius);
+    }
+    .kicker {
+      color: var(--green);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .28em;
+      font-size: .72rem;
+      margin-bottom: 14px;
+    }
+    .h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 1.02;
+      color: var(--navy);
+      margin: 0;
+      letter-spacing: -.03em;
+    }
+    .script {
+      color: var(--green);
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+    }
+    .text {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.02rem;
+      margin-top: 14px;
+      max-width: 62ch;
+    }
 
-.btn:hover{
-background:#52a9b9;
-transform:translateY(-4px);
-}
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+    .value {
+      border-radius: 22px;
+      background: rgba(255,255,255,.84);
+      border: 1px solid rgba(34,43,60,.06);
+      padding: 20px 18px;
+      min-height: 158px;
+      box-shadow: 0 10px 24px rgba(34,43,60,.05);
+    }
+    .value .badge {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(42,149,125,.12), rgba(82,169,185,.14));
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      font-weight: 800;
+    }
+    .value h3 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 1rem;
+    }
+    .value p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.55;
+    }
 
-.hero-image img{
-width:100%;
-max-width:980px;
-transform:scale(1.12);
-object-fit:contain;
-}
+    .roles-layout {
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .roles-side {
+      padding: clamp(24px, 3vw, 34px);
+      display: grid;
+      align-content: start;
+    }
+    .roles-list {
+      display: grid;
+      gap: 12px;
+    }
+    .role-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px 18px;
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(34,43,60,.06);
+      border-radius: 18px;
+    }
+    .role-left {
+      min-width: 0;
+    }
+    .role-left strong {
+      display:block;
+      color: var(--navy);
+      font-size: .98rem;
+      margin-bottom: 4px;
+    }
+    .role-left span {
+      display:block;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+    .pill-row {
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      align-items:center;
+      flex:0 0 auto;
+    }
+    .pill {
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: rgba(42,149,125,.10);
+      border: 1px solid rgba(42,149,125,.16);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
 
-section{
-padding:100px 6%;
-}
+    .team-banner {
+      margin-top: 22px;
+      border-radius: 30px;
+      overflow: hidden;
+      position: relative;
+      min-height: 280px;
+      display: grid;
+      align-items: end;
+      background: linear-gradient(135deg, rgba(34,43,60,.98), rgba(15,27,45,.92));
+      box-shadow: var(--shadow-lg);
+    }
+    .team-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 78% 18%, rgba(82,169,185,.22), transparent 18%),
+        radial-gradient(circle at 20% 80%, rgba(42,149,125,.20), transparent 18%),
+        url('team-white.png') center/cover no-repeat;
+      opacity: .14;
+    }
+    .team-banner-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      align-items: end;
+      gap: 18px;
+      padding: 30px;
+      color: white;
+    }
+    .team-banner-copy h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 3.7vw, 3.2rem);
+      line-height: 1.02;
+      margin: 0 0 10px;
+    }
+    .team-banner-copy p {
+      margin: 0;
+      color: rgba(255,255,255,.78);
+      line-height: 1.75;
+      max-width: 36ch;
+    }
+    .team-banner-images {
+      display: flex;
+      justify-content: flex-end;
+      align-items: end;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .team-banner-images img {
+      width: min(100%, 270px);
+      object-fit: contain;
+      filter: drop-shadow(0 20px 36px rgba(0,0,0,.20));
+    }
 
-.section-title{
-font-size:3rem;
-text-align:center;
-margin-bottom:20px;
-}
+    .app-section {
+      display: none;
+    }
+    .app-wrap {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 0;
+      overflow: hidden;
+      border-radius: 32px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(34,43,60,.06);
+      background: white;
+    }
+    .app-visual {
+      position: relative;
+      padding: clamp(26px, 3vw, 38px);
+      background:
+        radial-gradient(circle at 20% 18%, rgba(82,169,185,.18), transparent 24%),
+        linear-gradient(180deg, #0D2942 0%, #07253A 100%);
+      color: white;
+      min-height: 720px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    .app-visual::after {
+      content: "";
+      position: absolute;
+      inset: auto -12% -20% -12%;
+      height: 42%;
+      background: radial-gradient(circle at 50% 50%, rgba(82,169,185,.34), transparent 60%);
+      filter: blur(10px);
+      opacity: .7;
+    }
+    .app-visual-top {
+      position: relative;
+      z-index: 1;
+      max-width: 340px;
+    }
+    .app-visual-top h2 {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      line-height: .95;
+      letter-spacing: -.03em;
+    }
+    .app-visual-top h2 em { color: var(--blue); font-style: italic; }
+    .app-visual-top p {
+      margin: 14px 0 0;
+      color: rgba(255,255,255,.8);
+      line-height: 1.8;
+    }
+    .app-visual-art {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: end center;
+      min-height: 280px;
+    }
+    .app-visual-art img {
+      width: min(100%, 520px);
+      object-fit: contain;
+      filter: drop-shadow(0 18px 44px rgba(0,0,0,.24));
+    }
 
-.section-subtitle{
-text-align:center;
-max-width:800px;
-margin:auto auto 60px;
-opacity:.8;
-line-height:1.8;
-}
+    .form-card {
+      padding: clamp(24px, 3vw, 34px);
+    }
+    .form-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .form-header .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(42,149,125,.12), rgba(82,169,185,.16));
+      display: grid;
+      place-items: center;
+      color: var(--green);
+      font-size: 1.15rem;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+    .form-header h3 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 1.12rem;
+      letter-spacing: -.01em;
+    }
+    .form-header p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.5;
+    }
 
-.gallery{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:32px;
-max-width:1500px;
-margin:auto;
-}
+    .form {
+      display: grid;
+      gap: 14px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+    .field label {
+      font-size: .78rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .field input,
+    .field textarea,
+    .field select {
+      border: 1px solid rgba(34,43,60,.10);
+      background: rgba(248,251,251,.95);
+      color: var(--ink);
+      border-radius: 16px;
+      padding: 14px 15px;
+      outline: none;
+      transition: box-shadow .2s ease, border-color .2s ease, transform .2s ease;
+      width: 100%;
+    }
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: rgba(42,149,125,.45);
+      box-shadow: 0 0 0 4px rgba(42,149,125,.12);
+    }
+    .field textarea { min-height: 110px; resize: vertical; }
+    .field small {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: .82rem;
+    }
 
-.card{
-background:#132235;
-border-radius:28px;
-overflow:hidden;
-display:flex;
-flex-direction:column;
-min-height:560px;
-border:1px solid rgba(255,255,255,.08);
-}
+    .upload {
+      position: relative;
+      border: 1.5px dashed rgba(34,43,60,.16);
+      background: rgba(248,251,251,.84);
+      border-radius: 18px;
+      padding: 16px;
+      overflow: hidden;
+    }
+    .upload input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+    .upload strong {
+      display:block;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .upload span {
+      color: var(--muted);
+      font-size: .88rem;
+    }
+    .upload .name {
+      margin-top: 8px;
+      font-size: .86rem;
+      font-weight: 700;
+      color: var(--green);
+      word-break: break-word;
+    }
 
-.card img{
-width:100%;
-height:340px;
-object-fit:contain;
-padding:28px;
-background:#0d1725;
-}
+    .form-footer {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top: 8px;
+    }
+    .note {
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color: var(--muted);
+      font-size: .86rem;
+      line-height: 1.6;
+      max-width: 460px;
+    }
+    .submit {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-width: 220px;
+      padding: 16px 24px;
+      border: 0;
+      border-radius: 16px;
+      font-weight: 900;
+      letter-spacing: .02em;
+      cursor:pointer;
+      color: white;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      box-shadow: 0 14px 34px rgba(42,149,125,.24);
+    }
+    .submit:hover { transform: translateY(-2px); }
+    .submit:disabled { opacity: .72; cursor: not-allowed; transform: none; }
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.35);
+      border-top-color: white;
+      display: none;
+      animation: spin .8s linear infinite;
+    }
+    .submit.loading .spinner { display: inline-block; }
+    .submit.loading .btn-text { display:none; }
 
-.card-content{
-padding:30px;
-flex:1;
-}
+    .status {
+      display:none;
+      margin-top: 14px;
+      padding: 13px 14px;
+      border-radius: 14px;
+      font-size: .92rem;
+      font-weight: 700;
+    }
+    .status.show { display:block; }
+    .status.ok {
+      background: rgba(42,149,125,.08);
+      border: 1px solid rgba(42,149,125,.18);
+      color: var(--green-dark);
+    }
+    .status.err {
+      background: rgba(232,74,74,.08);
+      border: 1px solid rgba(232,74,74,.18);
+      color: #b43f3f;
+    }
 
-.card h3{
-font-size:1.5rem;
-margin-bottom:14px;
-}
+    .footer {
+      margin: 24px 0 28px;
+      color: var(--muted);
+      text-align:center;
+      font-size:.9rem;
+      line-height:1.6;
+    }
 
-.card p{
-line-height:1.8;
-opacity:.82;
-}
+    /* Modal */
+    .modal-overlay {
+      padding: 14px;
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: rgba(17,23,34,.78);
+      backdrop-filter: blur(10px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 22px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s ease;
+    }
+    .modal-overlay.open { opacity:1; pointer-events:auto; }
+    .modal {
+      position: relative;
+      width: 100%;
+      max-width: 820px;
+      max-height: 92vh;
+      overflow:auto;
+      background: white;
+      border-radius: 28px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(34,43,60,.08);
+      transform: translateY(14px) scale(.99);
+      transition: transform .22s ease;
+    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal-head {
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      padding: 26px 26px 18px;
+      border-bottom: 1px solid rgba(34,43,60,.08);
+      background: linear-gradient(135deg, rgba(42,149,125,.06), transparent);
+      border-radius: 28px 28px 0 0;
+    }
+    .modal-head h3 {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--navy);
+      line-height: 1.05;
+    }
+    .modal-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: .94rem;
+    }
+    .close {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(34,43,60,.10);
+      background: white;
+      color: var(--navy);
+      cursor:pointer;
+      font-size: 24px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+    .modal-body {
+      padding: 24px 26px 28px;
+    }
 
-.cta{
-text-align:center;
-}
+    .modal-success {
+      display:none;
+      text-align:center;
+      padding: 26px 18px 8px;
+    }
+    .modal-success.show { display:block; }
+    .success-mark {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      margin: 0 auto 18px;
+      display:grid;
+      place-items:center;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      color: white;
+      font-size: 2rem;
+      font-weight: 900;
+      box-shadow: 0 16px 36px rgba(42,149,125,.22);
+    }
+    .modal-success h4 {
+      margin: 0 0 8px;
+      font-family: "Playfair Display", serif;
+      font-size: 2rem;
+      color: var(--navy);
+    }
+    .modal-success p {
+      margin: 0 auto;
+      max-width: 460px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
 
-.modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.78);
-display:none;
-align-items:center;
-justify-content:center;
-padding:20px;
-z-index:999;
-backdrop-filter:blur(10px);
-}
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-.modal.active{
-display:flex;
-}
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-.modal-box{
-background:white;
-color:black;
-width:100%;
-max-width:950px;
-border-radius:28px;
-padding:35px;
-max-height:95vh;
-overflow:auto;
-}
+    @media (max-width: 1100px) {
+      .hero-inner,
+      .split,
+      .roles-layout,
+      .app-wrap,
+      .team-banner-inner {
+        grid-template-columns: 1fr;
+      }
+      .hero-card { min-height: auto; }
+      .hero-inner { min-height: auto; padding-bottom: 52px; }
+      .hero-visual { min-height: 540px; }
+      .hero-team-large { width: min(100%, 680px); }
+      .hero-team-black { width: min(92%, 640px); }
+      .hero-logo-mark { width: min(72%, 300px); }
+      .team-banner-images { justify-content: flex-start; }
+      .app-visual { min-height: 520px; }
+    }
 
-.close{
-float:right;
-font-size:32px;
-cursor:pointer;
-}
+    @media (max-width: 1024px) {
+      .hero-inner,
+      .split,
+      .roles-layout,
+      .app-wrap,
+      .team-banner-inner {
+        grid-template-columns: 1fr;
+      }
 
-.form-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
+      .hero {
+        padding-top: 10px;
+      }
 
-.field{
-margin-bottom:20px;
-}
+      .hero-card {
+        border-radius: 24px;
+      }
 
-.field label{
-display:block;
-margin-bottom:8px;
-font-weight:600;
-}
+      .hero-visual {
+        min-height: 520px;
+      }
 
-.field input,
-.field select,
-.field textarea{
-width:100%;
-padding:14px;
-border-radius:12px;
-border:1px solid #ccc;
-}
+      .hero-stack img {
+        width: 100%;
+      }
 
-.submit{
-width:100%;
-padding:18px;
-border:none;
-border-radius:16px;
-background:#2a957d;
-color:white;
-font-size:1rem;
-font-weight:600;
-cursor:pointer;
-}
+      .hero-team-large {
+        width: 100%;
+        right: 0;
+      }
 
-.status{
-margin-bottom:20px;
-font-weight:600;
-}
+      .hero-team-black {
+        width: 90%;
+        right: 0;
+      }
 
-@media(max-width:1200px){
-.hero-content{
-grid-template-columns:1fr;
-text-align:center;
-}
+      .hero-logo-mark {
+        width: 55%;
+      }
+    }
 
-.hero p{
-margin:auto auto 35px;
-}
+    @media (max-width: 760px) {
+      .header-inner {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .nav { display:none; }
+      .hero-card { border-radius: 26px; }
+      .hero-inner { padding: 24px 20px 40px; }
+      .hero h1 { max-width: none; }
+      .hero-points,
+      .value-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .app-section, .section { margin-top: 18px; }
+      .modal-head,
+      .modal-body { padding-left: 18px; padding-right: 18px; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .form-footer { flex-direction: column; align-items: stretch; }
+      .submit { width: 100%; }
+    }
 
-.gallery{
-grid-template-columns:1fr 1fr;
-}
-}
-
-@media(max-width:768px){
-.hero h1{
-font-size:2.8rem;
-}
-
-.hero-image img{
-transform:none;
-}
-
-.gallery,
-.form-grid{
-grid-template-columns:1fr;
-}
-}
-</style>
+    @media (max-width: 560px) {
+      .hero-points,
+      .value-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-actions {
+        flex-direction: column;
+      }
+      .btn, .nav-cta { width: 100%; }
+      .hero-visual { min-height: 430px; }
+      .team-banner-inner { padding: 22px 18px; }
+      .role-item { align-items: flex-start; }
+      .pill-row { justify-content:flex-start; }
+    }
+  </style>
 </head>
 <body>
+  <div class="noise"></div>
+  <div class="page">
+    <header class="header">
+      <div class="header-inner">
+        <div class="brand">
+          <!-- IMPORTANT: Put all image files inside the same folder as this HTML file -->
+          <img src="./logo.png" alt="Ligon-Razon Solutions logo" onerror="this.src='https://via.placeholder.com/200x200?text=LRS+Logo'" />
+          <div class="brand-copy">
+            <strong>Ligon-Razon Solutions</strong>
+            <span>Careers</span>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Primary">
+          <a href="#about">About Us</a>
+          <a href="#roles">Open Roles</a>
+          <a href="#values">Why Join Us</a>
+          <a href="#apply">Application</a>
+        </nav>
+        <button class="nav-cta open-modal-btn" type="button">Apply Now</button>
+      </div>
+    </header>
 
-<section class="hero">
-<div class="hero-content">
+    <main>
+      <section class="hero">
+        <div class="hero-shell">
+          <div class="hero-card">
+            <div class="hero-inner">
+              <div>
+                <div class="eyebrow">Your future, our mission</div>
+                <h1>Grow your career <em>together.</em></h1>
+                <p>
+                  At Ligon-Razon Solutions, we value people, purpose, and progress. Join a supportive team where your ideas matter, your growth is encouraged, and your work makes a real impact.
+                </p>
 
-<div>
-<img src="./logo.png" class="logo">
+                <div class="hero-points">
+                  <div class="point reveal">
+                    <div class="ico">01</div>
+                    <strong>Supportive Culture</strong>
+                    <span>Work with a team that values collaboration and trust.</span>
+                  </div>
+                  <div class="point reveal">
+                    <div class="ico">02</div>
+                    <strong>Career Growth</strong>
+                    <span>Build your skills in a place that encourages improvement.</span>
+                  </div>
+                  <div class="point reveal">
+                    <div class="ico">03</div>
+                    <strong>Meaningful Work</strong>
+                    <span>Contribute to services that help businesses grow.</span>
+                  </div>
+                  <div class="point reveal">
+                    <div class="ico">04</div>
+                    <strong>Work-Life Balance</strong>
+                    <span>Be part of a team that respects healthy productivity.</span>
+                  </div>
+                </div>
 
-<h1>Join The Ligon‑Razon Solutions Team</h1>
+                <div class="hero-actions">
+                  <button class="btn btn-primary open-modal-btn" type="button">Submit Your Application</button>
+                  <a class="btn btn-secondary" href="#roles">View Open Roles</a>
+                </div>
+              </div>
 
-<p>
-Build your career with a team that values growth, collaboration,
-creativity, and real impact.
-</p>
+              <div class="hero-visual" aria-label="Team images collage">
+                <div class="hero-shape"></div>
+                <div class="hero-stack">
+                  <!-- Replace these with your provided images -->
+                  <img class="hero-logo-mark" src="./logo.png" alt="Brand mark background" onerror="this.style.display='none'" />
+                  <img class="hero-team-large" src="./team-white.png" alt="Ligon-Razon Solutions team photo" onerror="this.style.display='none'" />
+                  <img class="hero-team-black" src="./team-black.png" alt="Ligon-Razon Solutions team photo black" onerror="this.style.display='none'" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<button class="btn" onclick="openModal()">
-Submit Your Application
-</button>
-</div>
+      <section class="section" id="about">
+        <div class="panel split">
+          <div class="left-card glass reveal">
+            <div class="kicker">Who we are</div>
+            <h2 class="h2">Driven by people. <span class="script">Focused on excellence.</span></h2>
+            <p class="text">
+              We are a team of dedicated professionals delivering dependable virtual support with integrity, innovation, and heart. Our recruitment portal is designed to feel welcoming, modern, and easy to use.
+            </p>
+            <div class="hero-actions" style="margin-top:22px;">
+              <button class="btn btn-primary open-modal-btn" type="button">Learn More About Us</button>
+            </div>
+          </div>
 
-<div class="hero-image">
-<img src="./team-white.png" alt="LRS Team">
-</div>
+          <div class="right-card glass reveal">
+            <div class="value-grid">
+              <div class="value">
+                <div class="badge">◎</div>
+                <h3>Integrity</h3>
+                <p>We do the right thing, even when no one is watching.</p>
+              </div>
+              <div class="value">
+                <div class="badge">◆</div>
+                <h3>Commitment</h3>
+                <p>We own our work and deliver with consistency.</p>
+              </div>
+              <div class="value">
+                <div class="badge">♡</div>
+                <h3>Empathy</h3>
+                <p>We care about people and build real connections.</p>
+              </div>
+              <div class="value">
+                <div class="badge">✦</div>
+                <h3>Excellence</h3>
+                <p>We always aim for quality in everything we do.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-</div>
-</section>
+      <section class="section" id="values">
+        <div class="panel glass reveal" style="padding:clamp(24px,3vw,34px);">
+          <div class="kicker">Why join us</div>
+          <h2 class="h2">A team that helps you <span class="script">grow stronger.</span></h2>
+          <p class="text">We look for applicants who are coachable, proactive, and excited to contribute to a positive team environment.</p>
 
-<section>
-<h2 class="section-title">Why Join Us?</h2>
-<p class="section-subtitle">
-At Ligon‑Razon Solutions, we believe in building careers,
-creating opportunities, and helping every team member grow.
-</p>
+          <div class="value-grid" style="margin-top:24px;">
+            <div class="value">
+              <div class="badge">01</div>
+              <h3>Clear Communication</h3>
+              <p>We appreciate applicants who can communicate clearly and professionally.</p>
+            </div>
+            <div class="value">
+              <div class="badge">02</div>
+              <h3>Strong Work Ethic</h3>
+              <p>Reliability and consistency matter in every role we hire for.</p>
+            </div>
+            <div class="value">
+              <div class="badge">03</div>
+              <h3>Growth Mindset</h3>
+              <p>We value people who want to learn, improve, and do better every day.</p>
+            </div>
+            <div class="value">
+              <div class="badge">04</div>
+              <h3>Team Spirit</h3>
+              <p>We believe great outcomes come from collaboration and respect.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<div class="gallery">
+      <section class="section" id="roles">
+        <div class="panel roles-layout">
+          <div class="roles-side glass reveal">
+            <div class="kicker">Open positions</div>
+            <h2 class="h2">Find the role <span class="script">that fits you.</span></h2>
+            <p class="text">These are sample roles you can keep, replace, or expand based on your current hiring needs.</p>
+            <div class="hero-actions" style="margin-top:22px;">
+              <button class="btn btn-secondary open-modal-btn" type="button">View All Open Roles</button>
+            </div>
+          </div>
 
-<div class="card">
-<img src="./team-black.png">
-<div class="card-content">
-<h3>Collaborative Team</h3>
-<p>Work with passionate professionals in a supportive environment.</p>
-</div>
-</div>
+          <div class="glass reveal" style="padding:clamp(24px,3vw,34px);">
+            <div class="roles-list">
+              <div class="role-item">
+                <div class="role-left">
+                  <strong>Virtual Assistant</strong>
+                  <span>Support daily operations and keep workflows organized.</span>
+                </div>
+                <div class="pill-row">
+                  <div class="pill">Remote</div>
+                  <div class="pill">Full-time</div>
+                </div>
+              </div>
+              <div class="role-item">
+                <div class="role-left">
+                  <strong>Customer Support Associate</strong>
+                  <span>Provide helpful and professional client support.</span>
+                </div>
+                <div class="pill-row">
+                  <div class="pill">Remote</div>
+                  <div class="pill">Full-time</div>
+                </div>
+              </div>
+              <div class="role-item">
+                <div class="role-left">
+                  <strong>Lead Generation Specialist</strong>
+                  <span>Help identify and organize potential business prospects.</span>
+                </div>
+                <div class="pill-row">
+                  <div class="pill">Remote</div>
+                  <div class="pill">Full-time</div>
+                </div>
+              </div>
+              <div class="role-item">
+                <div class="role-left">
+                  <strong>Social Media Manager</strong>
+                  <span>Create content and grow the brand's online presence.</span>
+                </div>
+                <div class="pill-row">
+                  <div class="pill">Remote</div>
+                  <div class="pill">Full-time</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<div class="card">
-<img src="./team-headset.png">
-<div class="card-content">
-<h3>Remote Opportunities</h3>
-<p>Flexible remote roles with growth opportunities.</p>
-</div>
-</div>
+      <section class="section">
+        <div class="panel team-banner reveal">
+          <div class="team-banner-inner">
+            <div class="team-banner-copy">
+              <div class="kicker" style="color:#8ee1d2;">Be part of the team</div>
+              <h2>Support your journey with people who care.</h2>
+              <p>Use your best photos to create a warm, professional banner that feels inviting and confident.</p>
+              <div class="hero-actions" style="margin-top:18px;">
+                <button class="btn btn-primary open-modal-btn" type="button">Submit Your Application</button>
+              </div>
+            </div>
+            <div class="team-banner-images">
+              <!-- Replace these with the uploaded cutout team images -->
+              <img src="./team-black.png" alt="Team group cutout" onerror="this.style.display='none'" />
+              <img src="./team-headset.png" alt="Team members with headsets" onerror="this.style.display='none'" />
+            </div>
+          </div>
+        </div>
+      </section>
 
-<div class="card">
-<img src="./team-office.png">
-<div class="card-content">
-<h3>Career Growth</h3>
-<p>Develop your skills while working with real clients and businesses.</p>
-</div>
-</div>
+      
 
-</div>
-</section>
+      <div class="container">
+        <div class="footer">© 2025 Ligon-Razon Solutions. All rights reserved.</div>
+      </div>
+    </main>
+  </div>
 
-<section class="cta">
-<h2 class="section-title">Ready To Be Part Of The Team?</h2>
-<button class="btn" onclick="openModal()">
-Submit Your Application
-</button>
-</section>
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <h3 id="modalTitle">Application Form</h3>
+          <p>Fill out the details below and submit your files securely.</p>
+        </div>
+        <button class="close" id="closeModalBtn" type="button" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
 
-<div class="modal" id="modal">
-<div class="modal-box">
+        <form id="applicationForm" class="form" novalidate>
+                <div class="grid-2">
+                  <div class="field">
+                    <label for="fullName">Full Name *</label>
+                    <input id="fullName" name="fullName" type="text" placeholder="Juan Dela Cruz" required />
+                  </div>
+                  <div class="field">
+                    <label for="email">Email Address *</label>
+                    <input id="email" name="email" type="email" placeholder="juan@email.com" required />
+                  </div>
+                </div>
 
-<span class="close" onclick="closeModal()">&times;</span>
+                <div class="grid-2">
+                  <div class="field">
+                    <label for="phone">Phone Number *</label>
+                    <input id="phone" name="phone" type="text" placeholder="+63 912 345 6789" required />
+                  </div>
+                  <div class="field">
+                    <label for="location">Current Location *</label>
+                    <input id="location" name="location" type="text" placeholder="Bulacan, Philippines" required />
+                  </div>
+                </div>
 
-<h2 style="margin-bottom:25px;">Application Form</h2>
+                <div class="grid-2">
+                  <div class="field">
+                    <label for="position">Position Applying For *</label>
+                    <select id="position" name="position" required>
+                      <option value="">Select a role</option>
+                      <option>Virtual Assistant</option>
+                      <option>Customer Support Associate</option>
+                      <option>Lead Generation Specialist</option>
+                      <option>Social Media Manager</option>
+                      <option>Admin / Operations Assistant</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="experience">Years of Experience *</label>
+                    <input id="experience" name="experience" type="text" placeholder="e.g. 2 years" required />
+                  </div>
+                </div>
 
-<form id="applicationForm">
+                <div class="field">
+                  <label for="timezone">Preferred Timezone / Working Hours *</label>
+                  <input id="timezone" name="timezone" type="text" placeholder="e.g. Manila Time / Night Shift / Flexible" required />
+                </div>
 
-<div class="form-grid">
+                <div class="field">
+                  <label for="skills">Relevant Skills *</label>
+                  <input id="skills" name="skills" type="text" placeholder="e.g. CRM, email support, lead generation" required />
+                </div>
 
-<div class="field">
-<label>Full Name</label>
-<input type="text" name="name" required>
-</div>
+                <div class="field">
+                  <label for="intro">Short Introduction / About Yourself *</label>
+                  <textarea id="intro" name="intro" placeholder="Tell us a little about yourself..." required></textarea>
+                </div>
 
-<div class="field">
-<label>Email Address</label>
-<input type="email" name="email" required>
-</div>
+                <div class="field">
+                  <label for="portfolioLink">Portfolio / Social Link</label>
+                  <input id="portfolioLink" name="portfolioLink" type="url" placeholder="https://..." />
+                </div>
 
-<div class="field">
-<label>Phone Number</label>
-<input type="text" name="phone" required>
-</div>
+                <div class="grid-2">
+                  <div class="field">
+                    <label>Upload Your CV *</label>
+                    <div class="upload" id="cvDrop">
+                      <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx" required />
+                      <strong>Choose CV / Resume</strong>
+                      <span>PDF, DOC, DOCX</span>
+                      <div class="name" id="cvName"></div>
+                    </div>
+                  </div>
 
-<div class="field">
-<label>Position Applying For</label>
-<select name="position" required>
-<option value="">Select Position</option>
-<option>Virtual Assistant</option>
-<option>Lead Generation Specialist</option>
-<option>Customer Support</option>
-<option>Social Media Manager</option>
-</select>
-</div>
+                  <div class="field">
+                    <label>Upload Portfolio</label>
+                    <div class="upload" id="portfolioDrop">
+                      <input id="portfolio" name="portfolio" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.zip" />
+                      <strong>Choose Portfolio</strong>
+                      <span>Optional file upload</span>
+                      <div class="name" id="portfolioName"></div>
+                    </div>
+                  </div>
+                </div>
 
-</div>
+                <div class="form-footer">
+                  <div class="note">
+                    <span>ⓘ</span>
+                    <span>Your submission will be sent to Google Sheets, while your files will be stored in Google Drive inside a folder created for your application.</span>
+                  </div>
+                  <button class="submit" id="submitBtn" type="submit">
+                    <span class="spinner" aria-hidden="true"></span>
+                    <span class="btn-text">Submit Application</span>
+                  </button>
+                </div>
+              </form>
+        <div id="popupFormContainer"></div>
+        <div class="modal-success" id="modalSuccess">
+          <div class="success-mark">✓</div>
+          <h4>Application submitted</h4>
+          <p>Thank you for applying to Ligon-Razon Solutions. Your details have been recorded successfully.</p>
+          <div style="margin-top:22px;">
+            <button class="btn btn-secondary" type="button" id="closeSuccessBtn">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="field">
-<label>Short Introduction</label>
-<textarea rows="5" name="intro"></textarea>
-</div>
+  <script>
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzu7_27xqngly67cuXjonvXdzmm4N7TPmxorAMRSfD8a0W_tZpsg0C8migYeDT-gK1G/exec';
 
-<div class="field">
-<label>Upload CV</label>
-<input type="file" id="cv">
-</div>
+    const header = document.querySelector('.header');
+    const openButtons = document.querySelectorAll('.open-modal-btn');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+    const form = document.getElementById('applicationForm');
+    const statusBox = document.getElementById('statusBox');
+    const submitBtn = document.getElementById('submitBtn');
+    const cvInput = document.getElementById('cv');
+    const portfolioInput = document.getElementById('portfolio');
+    const cvName = document.getElementById('cvName');
+    const portfolioName = document.getElementById('portfolioName');
+    const modalBody = document.querySelector('.modal-body');
+    const modalSuccess = document.getElementById('modalSuccess');
 
-<div class="field">
-<label>Upload Portfolio</label>
-<input type="file" id="portfolio">
-</div>
+    function openModal() {
+      document.getElementById('applicationForm').style.display = 'grid';
+      modalOverlay.classList.add('open');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      statusBox.className = 'status';
+      statusBox.textContent = '';
+    }
 
-<div id="statusBox" class="status"></div>
+    function closeModal() {
+      modalOverlay.classList.remove('open');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        modalSuccess.classList.remove('show');
+        form.style.display = 'grid';
+        modalBody.style.paddingTop = '';
+      }, 150);
+    }
 
-<button type="submit" class="submit" id="submitBtn">
-Submit Application
-</button>
+    openButtons.forEach(btn => btn.addEventListener('click', openModal));
+    closeModalBtn.addEventListener('click', closeModal);
+    closeSuccessBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal(); });
 
-</form>
+    window.addEventListener('scroll', () => {
+      header.style.boxShadow = window.scrollY > 8 ? '0 8px 34px rgba(34,43,60,.08)' : 'none';
+    });
 
-</div>
-</div>
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-<script>
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzu7_27xqngly67cuXjonvXdzmm4N7TPmxorAMRSfD8a0W_tZpsg0C8migYeDT-gK1G/exec';
+    function setStatus(message, type) {
+      statusBox.textContent = message;
+      statusBox.className = `status show ${type}`;
+    }
 
-function openModal(){
-document.getElementById('modal').classList.add('active');
-}
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result).split(',')[1] || '');
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
 
-function closeModal(){
-document.getElementById('modal').classList.remove('active');
-}
+    function updateFileLabel(input, label) {
+      label.textContent = input.files && input.files[0] ? input.files[0].name : '';
+    }
 
-const form = document.getElementById('applicationForm');
-const statusBox = document.getElementById('statusBox');
+    cvInput.addEventListener('change', () => updateFileLabel(cvInput, cvName));
+    portfolioInput.addEventListener('change', () => updateFileLabel(portfolioInput, portfolioName));
 
-form.addEventListener('submit', async function(e){
-e.preventDefault();
+    async function sendPayload(payload) {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(payload)
+      });
+    }
 
-statusBox.innerHTML = 'Submitting application...';
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-const payload = {
-name: form.name.value,
-email: form.email.value,
-phone: form.phone.value,
-position: form.position.value,
-intro: form.intro.value
-};
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
 
-try{
-await fetch(APPS_SCRIPT_URL,{
-method:'POST',
-body:JSON.stringify(payload)
-});
+      submitBtn.disabled = true;
+      submitBtn.classList.add('loading');
+      setStatus('Submitting your application...', 'ok');
 
-statusBox.innerHTML = 'Application submitted successfully!';
-form.reset();
+      try {
+        const payload = {
+          name: form.fullName.value.trim(),
+          email: form.email.value.trim(),
+          phone: form.phone.value.trim(),
+          location: form.location.value.trim(),
+          position: form.position.value.trim(),
+          experience: form.experience.value.trim(),
+          timezone: form.timezone.value.trim(),
+          skills: form.skills.value.trim(),
+          intro: form.intro.value.trim(),
+          portfolioLink: form.portfolioLink.value.trim()
+        };
 
-}catch(error){
-console.error(error);
-statusBox.innerHTML = 'Submission failed.';
-}
-});
-</script>
+        const cvFile = cvInput.files[0];
+        if (cvFile) {
+          payload.cvBase64 = await fileToBase64(cvFile);
+          payload.cvFileName = cvFile.name;
+          payload.cvMimeType = cvFile.type || 'application/octet-stream';
+        }
 
+        const portFile = portfolioInput.files[0];
+        if (portFile) {
+          payload.portBase64 = await fileToBase64(portFile);
+          payload.portFileName = portFile.name;
+          payload.portMimeType = portFile.type || 'application/octet-stream';
+        }
+
+        await sendPayload(payload);
+
+        form.reset();
+        cvName.textContent = '';
+        portfolioName.textContent = '';
+        setStatus('Application submitted successfully.', 'ok');
+        modalSuccess.classList.add('show');
+        form.style.display = 'none';
+      } catch (err) {
+        console.error(err);
+        setStatus('Submission failed. Please try again.', 'err');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+      }
+    });
+  </script>
+  <!--
+
+========================================
+REQUIRED FILES INSIDE YOUR FOLDER
+========================================
+
+Place ALL these files inside the SAME folder:
+
+RECRUITMENT/
+│── index.html
+│── Code.gs
+│── logo.png
+│── team-white.png
+│── team-black.png
+│── team-headset.png
+│── team-office.png
+
+========================================
+IMAGE FILE GUIDE
+========================================
+
+logo.png
+→ Your official Ligon-Razon Solutions logo
+
+team-white.png
+→ Team photo wearing white shirts
+
+team-black.png
+→ Team photo wearing black shirts
+
+team-headset.png
+→ Headset/team support image
+
+team-office.png
+→ Team members working on laptops/office setup
+
+========================================
+GOOGLE APPS SCRIPT SETUP
+========================================
+
+1. Open:
+https://script.google.com
+
+2. Create New Project
+
+3. Rename project to:
+LRS Recruitment Backend
+
+4. Create a file named:
+Code.gs
+
+5. Paste your backend code there
+
+6. Click Deploy → New Deployment
+
+7. Select:
+Web App
+
+8. Execute as:
+Me
+
+9. Who has access:
+Anyone
+
+10. Click Deploy
+
+11. Copy the Web App URL
+
+12. Replace this line in index.html:
+
+const APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+with:
+
+const APPS_SCRIPT_URL = 'YOUR_DEPLOYED_WEB_APP_URL';
+
+========================================
+HOW TO RUN WEBSITE
+========================================
+
+OPTION 1 (Recommended)
+Open using VS Code + Live Server
+
+OPTION 2
+Upload folder to GitHub Pages
+
+========================================
+GITHUB PAGES DEPLOYMENT
+========================================
+
+1. Create GitHub repository
+2. Upload all files
+3. Go to:
+Settings → Pages
+4. Source:
+Deploy from branch
+5. Branch:
+main
+6. Save
+
+Your website will go live automatically.
+
+========================================
+IMPORTANT
+========================================
+
+If images are not showing:
+
+✔ Make sure file names are EXACTLY the same
+✔ Make sure images are inside the same folder as index.html
+✔ Refresh browser using CTRL + SHIFT + R
+✔ Do not rename image files differently
+
+========================================
+
+--> 
 </body>
 </html>
