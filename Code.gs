@@ -9,9 +9,13 @@ function doPost(e) {
     const sheet = getOrCreateSheet();
     const parentFolder = DriveApp.getFolderById(FOLDER_ID);
 
+    const applicantName = buildApplicantName(data);
+    const roleApplying = (data.roleApplying || data.position || 'Application').toString().trim();
+
     const applicantFolder = getOrCreateApplicantFolder(
       parentFolder,
-      data.name
+      applicantName,
+      roleApplying
     );
 
     let cvLink = '';
@@ -37,11 +41,13 @@ function doPost(e) {
 
     sheet.appendRow([
       new Date(),
-      data.name || '',
+      data.lastName || '',
+      data.firstName || '',
+      data.middleInitial || '',
       data.email || '',
       data.phone || '',
       data.location || '',
-      data.position || '',
+      (data.roleApplying || data.position || ''),
       data.experience || '',
       data.timezone || '',
       data.skills || '',
@@ -82,11 +88,13 @@ function getOrCreateSheet() {
 
     sheet.appendRow([
       'Timestamp',
-      'Full Name',
+      'Last Name',
+      'First Name',
+      'Middle Initial',
       'Email Address',
       'Phone Number',
       'Location',
-      'Position Applied',
+      'Role Applying',
       'Years of Experience',
       'Preferred Timezone',
       'Relevant Skills',
@@ -97,7 +105,7 @@ function getOrCreateSheet() {
       'Applicant Folder Link'
     ]);
 
-    sheet.getRange(1, 1, 1, 14)
+    sheet.getRange(1, 1, 1, 16)
       .setFontWeight('bold')
       .setBackground('#2A957D')
       .setFontColor('#FFFFFF');
@@ -108,13 +116,25 @@ function getOrCreateSheet() {
   return sheet;
 }
 
-function getOrCreateApplicantFolder(parentFolder, applicantName) {
+function buildApplicantName(data) {
+  const lastName = (data.lastName || '').toString().trim();
+  const firstName = (data.firstName || '').toString().trim();
+  const middleInitial = (data.middleInitial || '').toString().trim();
+  const fromParts = [lastName, firstName, middleInitial].filter(Boolean).join(' ').trim();
+  return fromParts || (data.name || 'Applicant').toString().trim() || 'Applicant';
+}
+
+function getOrCreateApplicantFolder(parentFolder, applicantName, position) {
 
   const sanitizedName = applicantName
     .replace(/[\\/:*?"<>|]/g, '')
     .trim();
 
-  const folderName = sanitizedName + ' - Application';
+  const sanitizedPosition = (position || 'Application')
+    .replace(/[\\/:*?"<>|]/g, '')
+    .trim();
+
+  const folderName = sanitizedName + ' - ' + sanitizedPosition;
 
   const existingFolders = parentFolder.getFoldersByName(folderName);
 
