@@ -301,56 +301,54 @@
 
     .hero-visual {
       position: relative;
-      min-height: 860px;
+      min-height: 780px;
       display: grid;
       place-items: center;
+      overflow: hidden;
+      isolation: isolate;
     }
     .hero-shape {
       position: absolute;
-      inset: 12% 6% 8% 10%;
-      clip-path: polygon(10% 16%, 86% 0, 100% 57%, 54% 100%, 0 70%);
-      background: linear-gradient(135deg, rgba(82,169,185,.18), rgba(42,149,125,.16));
-      filter: blur(.1px);
-      transform: rotate(6deg);
+      inset: 0;
+      border-radius: 38px;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(82,169,185,.08), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(244,249,250,.92));
     }
     .hero-stack {
       position: relative;
       z-index: 1;
       width: 100%;
       height: 100%;
-      display: grid;
-      place-items: end center;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
     }
     .hero-stack img {
       position: absolute;
       width: min(100%, 1040px);
       max-height: 100%;
       object-fit: contain;
-      filter: drop-shadow(0 24px 50px rgba(34,43,60,.16));
       transform-origin: center;
     }
     .hero-team-large {
-      bottom: 1%;
-      right: -2%;
-      width: min(122%, 1040px);
+      bottom: 0;
+      right: 0;
+      width: min(92%, 760px);
       z-index: 2;
-      transform: translateX(2%);
+      transform: translateX(0);
     }
     .hero-team-black {
-      bottom: 0;
-      right: -4%;
-      width: min(112%, 980px);
-      z-index: 1;
-      opacity: .95;
-      mix-blend-mode: multiply;
+      display: none;
     }
     .hero-logo-mark {
       position: absolute;
-      top: 2%;
-      right: 4%;
-      width: min(92%, 470px);
+      top: 50%;
+      left: 58%;
+      transform: translate(-50%, -50%);
+      width: min(76%, 520px);
       z-index: 0;
-      opacity: .95;
+      opacity: .12;
       filter: saturate(1.02);
     }
     .hero-cards {
@@ -700,17 +698,17 @@
 
     .form {
       display: grid;
-      gap: 14px;
+      gap: 10px;
     }
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
+      gap: 10px;
     }
     .grid-3 {
       display: grid;
       grid-template-columns: 1fr 1fr 0.45fr;
-      gap: 14px;
+      gap: 10px;
     }
     .nav-link {
       background: none;
@@ -729,8 +727,8 @@
       gap: 8px;
     }
     .field label {
-      font-size: .78rem;
-      letter-spacing: .12em;
+      font-size: .72rem;
+      letter-spacing: .10em;
       text-transform: uppercase;
       font-weight: 800;
       color: var(--navy);
@@ -741,8 +739,8 @@
       border: 1px solid rgba(34,43,60,.10);
       background: rgba(248,251,251,.95);
       color: var(--ink);
-      border-radius: 16px;
-      padding: 14px 15px;
+      border-radius: 14px;
+      padding: 11px 13px;
       outline: none;
       transition: box-shadow .2s ease, border-color .2s ease, transform .2s ease;
       width: 100%;
@@ -753,7 +751,7 @@
       border-color: rgba(42,149,125,.45);
       box-shadow: 0 0 0 4px rgba(42,149,125,.12);
     }
-    .field textarea { min-height: 110px; resize: vertical; }
+    .field textarea { min-height: 88px; resize: vertical; }
     .field small {
       color: var(--muted);
       line-height: 1.55;
@@ -797,9 +795,9 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
+      gap:12px;
       flex-wrap:wrap;
-      margin-top: 8px;
+      margin-top: 4px;
     }
     .note {
       display:flex;
@@ -815,8 +813,8 @@
       align-items:center;
       justify-content:center;
       gap:10px;
-      min-width: 220px;
-      padding: 16px 24px;
+      min-width: 200px;
+      padding: 14px 22px;
       border: 0;
       border-radius: 16px;
       font-weight: 900;
@@ -870,7 +868,7 @@
 
     /* Modal */
     .modal-overlay {
-      padding: 22px;
+      padding: 18px;
       position: fixed;
       inset: 0;
       z-index: 99;
@@ -887,10 +885,11 @@
     .modal-overlay.open { opacity:1; pointer-events:auto; }
     .modal {
       position: relative;
-      width: 100%;
-      max-width: 1180px;
-      max-height: none;
-      overflow: hidden;
+      width: min(94vw, 1140px);
+      max-width: 1140px;
+      max-height: 90vh;
+      overflow-y: auto;
+      overflow-x: hidden;
       background: white;
       border-radius: 28px;
       box-shadow: var(--shadow-lg);
@@ -904,7 +903,7 @@
       align-items:flex-start;
       justify-content:space-between;
       gap:14px;
-      padding: 26px 26px 18px;
+      padding: 20px 22px 14px;
       border-bottom: 1px solid rgba(34,43,60,.08);
       background: linear-gradient(135deg, rgba(42,149,125,.06), transparent);
       border-radius: 28px 28px 0 0;
@@ -935,7 +934,7 @@
       flex: 0 0 auto;
     }
     .modal-body {
-      padding: 24px 26px 28px;
+      padding: 18px 22px 22px;
       max-height: none;
       overflow: visible;
     }
@@ -994,10 +993,10 @@
       }
       .hero-card { min-height: auto; }
       .hero-inner { min-height: auto; padding-bottom: 52px; }
-      .hero-visual { min-height: 540px; }
-      .hero-team-large { width: min(100%, 680px); }
-      .hero-team-black { width: min(92%, 640px); }
-      .hero-logo-mark { width: min(72%, 300px); }
+      .hero-visual { min-height: 520px; }
+      .hero-team-large { width: min(100%, 640px); }
+      .hero-team-black { display: none; }
+      .hero-logo-mark { width: min(66%, 280px); }
       .team-banner-images { justify-content: flex-start; }
       .app-visual { min-height: 520px; }
     }
@@ -1020,7 +1019,7 @@
       }
 
       .hero-visual {
-        min-height: 620px;
+        min-height: 560px;
       }
 
       .hero-stack img {
@@ -1028,17 +1027,16 @@
       }
 
       .hero-team-large {
-        width: 112%;
+        width: 100%;
         right: 0;
       }
 
       .hero-team-black {
-        width: 98%;
-        right: 0;
+        display: none;
       }
 
       .hero-logo-mark {
-        width: 62%;
+        width: 58%;
       }
     }
 
@@ -1058,6 +1056,13 @@
       .app-section, .section { margin-top: 18px; }
       .modal-head,
       .modal-body { padding-left: 18px; padding-right: 18px; }
+
+      .modal {
+        width: 100%;
+        max-width: 100%;
+        max-height: 94vh;
+        border-radius: 22px;
+      }
       .grid-2 { grid-template-columns: 1fr; }
       .form-footer { flex-direction: column; align-items: stretch; }
       .submit { width: 100%; }
@@ -1072,7 +1077,7 @@
         flex-direction: column;
       }
       .btn, .nav-cta { width: 100%; }
-      .hero-visual { min-height: 430px; }
+      .hero-visual { min-height: 390px; }
       .team-banner-inner { padding: 22px 18px; }
       .role-item { align-items: flex-start; }
       .pill-row { justify-content:flex-start; }
@@ -1143,13 +1148,11 @@
                 </div>
               </div>
 
-              <div class="hero-visual" aria-label="Team images collage">
+              <div class="hero-visual" aria-label="Team hero image">
                 <div class="hero-shape"></div>
                 <div class="hero-stack">
-                  <!-- Replace these with your provided images -->
                   <img class="hero-logo-mark" src="./logo.png" alt="Brand mark background" onerror="this.style.display='none'" />
-                  <img class="hero-team-large" src="./team-white.png" alt="Ligon-Razon Solutions team photo" onerror="this.style.display='none'" />
-                  <img class="hero-team-black" src="./team-black.png" alt="Ligon-Razon Solutions team photo black" onerror="this.style.display='none'" />
+                  <img class="hero-team-large" src="./team-headset.png" alt="Ligon-Razon Solutions team photo" onerror="this.style.display='none'" />
                 </div>
               </div>
             </div>
