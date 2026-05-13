@@ -1309,8 +1309,6 @@
         </div>
       </section>
 
-      
-
       <div class="container">
         <div class="footer">© 2025 Ligon-Razon Solutions. All rights reserved.</div>
       </div>
@@ -1382,8 +1380,12 @@
                 </div>
 
                 <div class="field">
-                  <label for="timezone">Preferred Timezone / Working Hours *</label>
-                  <input id="timezone" name="timezone" type="text" placeholder="e.g. Manila Time / Night Shift / Flexible" required />
+                  <label for="employmentType">Employment Type *</label>
+                  <select id="employmentType" name="employmentType" required>
+                    <option value="">Select employment type</option>
+                    <option value="Full-Time">Full-Time</option>
+                    <option value="Part-Time">Part-Time</option>
+                  </select>
                 </div>
 
                 <div class="field">
@@ -1567,7 +1569,7 @@
           position: roleApplying,
           roleApplying: roleApplying,
           experience: form.experience.value.trim(),
-          timezone: form.timezone.value.trim(),
+          employmentType: form.employmentType.value.trim(),
           skills: form.skills.value.trim(),
           intro: form.intro.value.trim(),
           portfolioLink: form.portfolioLink.value.trim()
